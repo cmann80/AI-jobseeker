@@ -13,7 +13,7 @@ chat = ChatOpenAI(temperature=0)
 llm = OpenAI(temperature=0)
 
 # serpapi allows the access of Google
-tools = load_tools(["serpapi", "llm-math", "PythonREPL"], llm = llm)
+tools = load_tools(["serpapi"], llm = llm)
 
 # one shot indicates that it will feed all messages to the model at once
 agent = initialize_agent(tools, chat, agent=AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION, verbose = True)
