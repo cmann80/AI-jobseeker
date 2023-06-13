@@ -19,9 +19,11 @@
         
 
 
+
 def scrape_careers_page():
     import requests
     from bs4 import BeautifulSoup
+     
     
     # choose a random company from the list
     company = "Microsoft"

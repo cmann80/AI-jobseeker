@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+from langchain.llms import OpenAI
 from langchain.agents import initialize_agent, Tool
 from langchain.tools import BaseTool
 from langchain.chat_models import ChatOpenAI
@@ -5,6 +7,8 @@ from langchain.agents import tool
 import requests
 from bs4 import BeautifulSoup
 import json
+
+load_dotenv()
 
 @tool
 def microsoft_career_search(query: str) -> str:
@@ -22,3 +26,12 @@ def microsoft_career_search(query: str) -> str:
     elements = soup.select("[class*='ms-list']")
     
     return str(elements)
+
+llm = OpenAI(temperature=0)
+
+tools = [microsoft_career_search]
+agent = initialize_agent(tools, llm, agent="chat-zero-shot-react-description", verbose = True)
+
+result = agent.run("AI training")
+
+print(result)
